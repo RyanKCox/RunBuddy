@@ -1,11 +1,15 @@
 package com.revature.runbuddy
 
 import android.os.Bundle
+import android.view.ViewGroup
 import com.bluelinelabs.conductor.Router
+import com.revature.runbuddy.databinding.ControllerTitleScreenBinding
 import com.revature.runbuddy.presentation.core.BaseActivity
 import com.revature.runbuddy.presentation.title.TitleController
 
 class MainActivity : BaseActivity() {
+
+    private lateinit var container:ViewGroup
 
     val mainControllerChildRouter: Router?
         get() {
@@ -17,9 +21,4 @@ class MainActivity : BaseActivity() {
                 mainController.childRouters[0]
             } else null
         }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 }

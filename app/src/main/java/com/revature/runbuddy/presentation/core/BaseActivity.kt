@@ -13,6 +13,17 @@ import java.lang.IllegalArgumentException
 abstract class BaseActivity: AppCompatActivity() {
     protected  var router: Router? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onCreating(savedInstanceState)
+    }
+    protected fun onCreating(savedInstanceState: Bundle?){
+        injectDependencies()
+    }
+    private fun injectDependencies(){
+
+    }
+
     protected fun setupRouter(container:ViewGroup,savedInstanceState:Bundle?){
         router = Conductor.attachRouter(this,container,savedInstanceState)
     }
@@ -44,5 +55,4 @@ abstract class BaseActivity: AppCompatActivity() {
         }
         super.onBackPressed()
     }
-
 }

@@ -7,7 +7,10 @@ import io.reactivex.Observable
 
 class TitlePresenter(
     private val nav:Navigator
-):MviBasePresenter<TitleView,TitleViewState>{
+):MviBasePresenter<TitleView,TitleViewState>(){
+    override fun bindIntents() {
+        TODO("Not yet implemented")
+    }
 
 }
 
