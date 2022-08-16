@@ -77,9 +77,9 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
 
     //Contributer
-    implementation "com.github.IVIanuu.Contributer:contributer-conductor:$contributer"
-    implementation "com.github.IVIanuu.Contributer:contributer-annotations:$contributer"
-    annotationProcessor "com.github.IVIanuu.Contributer:contributer-processor:$contributer"
+//    implementation "com.github.IVIanuu.Contributer:contributer-conductor:$contributer"
+//    implementation "com.github.IVIanuu.Contributer:contributer-annotations:$contributer"
+//    annotationProcessor "com.github.IVIanuu.Contributer:contributer-processor:$contributer"
 
     //Support Libs
     implementation "androidx.annotation:annotation:$androidxAnnotations"

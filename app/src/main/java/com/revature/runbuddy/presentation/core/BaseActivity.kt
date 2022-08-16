@@ -7,19 +7,13 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.ivianuu.contributer.conductor.HasControllerInjector
-import com.revature.runbuddy.presentation.core.di.ActivityComponentBuilder
-import com.revature.runbuddy.presentation.core.di.HasActivitySubcomponentBuilders
-import dagger.android.DispatchingAndroidInjector
 import io.reactivex.exceptions.Exceptions
 import javax.inject.Inject
 
-abstract class BaseActivity: AppCompatActivity(), HasControllerInjector {
+abstract class BaseActivity: AppCompatActivity() {
 
     protected  var router: Router? = null
 
-    @Inject
-    lateinit var controllerInjector:DispatchingAndroidInjector<Controller>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +26,6 @@ abstract class BaseActivity: AppCompatActivity(), HasControllerInjector {
 
     }
 
-    override fun controllerInjector(): DispatchingAndroidInjector<Controller> {
-        return controllerInjector
-    }
-    protected abstract fun prepareControllerComponent(
-        subComponentBuilderHost: HasActivitySubcomponentBuilders)
-    : ActivityComponentBuilder<*,*>
 
     protected fun setupRouter(container:ViewGroup,savedInstanceState:Bundle?){
         router = Conductor.attachRouter(this,container,savedInstanceState)
