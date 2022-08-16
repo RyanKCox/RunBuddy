@@ -5,11 +5,15 @@ import com.hannesdorfmann.mosby3.mvp.MvpView
 import com.revature.runbuddy.presentation.core.Navigator
 import io.reactivex.Observable
 
-class TitlePresenter(
-    private val nav:Navigator
+class TitlePresenter (
+//    private val nav:Navigator
 ):MviBasePresenter<TitleView,TitleViewState>(){
     override fun bindIntents() {
-        TODO("Not yet implemented")
+
+        val viewState = Observable.just(TitleViewState.DisplayScreen)
+            .ofType(TitleViewState::class.java)
+
+        subscribeViewState(viewState){view,state->view.render(state)}
     }
 
 }
@@ -17,7 +21,7 @@ class TitlePresenter(
 interface TitleView:MvpView{
     fun initialIntent():Observable<Unit>
     fun enterIntent():Observable<Unit>
-    fun render()
+    fun render(state:TitleViewState)
 }
 sealed class TitleViewState{
     object Loading:TitleViewState()

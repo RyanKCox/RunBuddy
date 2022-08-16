@@ -7,22 +7,37 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import com.ivianuu.contributer.conductor.HasControllerInjector
+import com.revature.runbuddy.presentation.core.di.ActivityComponentBuilder
+import com.revature.runbuddy.presentation.core.di.HasActivitySubcomponentBuilders
+import dagger.android.DispatchingAndroidInjector
 import io.reactivex.exceptions.Exceptions
-import java.lang.IllegalArgumentException
+import javax.inject.Inject
 
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity: AppCompatActivity(), HasControllerInjector {
+
     protected  var router: Router? = null
+
+    @Inject
+    lateinit var controllerInjector:DispatchingAndroidInjector<Controller>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onCreating(savedInstanceState)
     }
-    protected fun onCreating(savedInstanceState: Bundle?){
+    protected open fun onCreating(savedInstanceState: Bundle?){
         injectDependencies()
     }
     private fun injectDependencies(){
 
     }
+
+    override fun controllerInjector(): DispatchingAndroidInjector<Controller> {
+        return controllerInjector
+    }
+    protected abstract fun prepareControllerComponent(
+        subComponentBuilderHost: HasActivitySubcomponentBuilders)
+    : ActivityComponentBuilder<*,*>
 
     protected fun setupRouter(container:ViewGroup,savedInstanceState:Bundle?){
         router = Conductor.attachRouter(this,container,savedInstanceState)
@@ -45,7 +60,7 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
     protected fun pushController(controller:Controller) {
-        router?.let { it.pushController(RouterTransaction.with(controller)) }
+        router?.pushController(RouterTransaction.with(controller))
     }
 
     override fun onBackPressed() {
