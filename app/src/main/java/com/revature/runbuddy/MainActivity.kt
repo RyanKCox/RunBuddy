@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.Router
 import com.revature.runbuddy.databinding.ActivityMainBinding
 import com.revature.runbuddy.presentation.core.BaseActivity
-import com.revature.runbuddy.presentation.core.di.ActivityComponentBuilder
-import com.revature.runbuddy.presentation.core.di.HasActivitySubcomponentBuilders
-import com.revature.runbuddy.presentation.core.di.components.MainActivityComponent
 import com.revature.runbuddy.presentation.title.TitleController
 
 class MainActivity : BaseActivity() {
@@ -42,10 +39,10 @@ class MainActivity : BaseActivity() {
         Log.d("MainActivity","RootController Setup")
         setupRootController(TitleController())
     }
-
+/*
     override fun prepareControllerComponent(subComponentBuilderHost: HasActivitySubcomponentBuilders): ActivityComponentBuilder<*, *> {
         return subComponentBuilderHost.getActivityComponentBuilder(
             MainActivityComponent.Builder::class.java
         )
-    }
+    }*/
 }

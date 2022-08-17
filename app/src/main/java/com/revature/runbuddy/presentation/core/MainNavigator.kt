@@ -10,6 +10,7 @@ import com.hannesdorfmann.mosby3.MviController
 import com.revature.runbuddy.MainActivity
 import com.revature.runbuddy.presentation.core.conductor.routerTransaction
 import com.revature.runbuddy.presentation.title.TitleController
+import javax.inject.Inject
 
 enum class NavigationAction{
     Title,
@@ -25,11 +26,11 @@ interface Navigator{
     fun backFromChild()
 }
 
-class MainNavigator(
-    private val activity:AppCompatActivity,
-    private val context: Context
+class MainNavigator @Inject constructor(
+//    val activity:AppCompatActivity,
+    val context: Context
 ) : Navigator {
-    private fun getRouter():Router? = (activity as MainActivity).mainControllerChildRouter
+    private fun getRouter():Router? = (context as MainActivity).mainControllerChildRouter
 
     private fun push(
         newController: Controller,

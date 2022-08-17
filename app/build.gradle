@@ -41,7 +41,7 @@ dependencies {
     def mosbyVersion = "3.1.0"
     def rxBinding = "2.1.1"
     def groupie = "2.10.1"
-    def dagger = "2.40"
+    def dagger = "2.43.2"
     def androidxAnnotations = "1.4.0"
     def contributer = "1.0.0"
 
@@ -74,12 +74,14 @@ dependencies {
 
     //Dagger
     implementation "com.google.dagger:dagger:$dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
 
     //Contributer
-    implementation "com.github.IVIanuu.Contributer:contributer-conductor:$contributer"
-    implementation "com.github.IVIanuu.Contributer:contributer-annotations:$contributer"
-    annotationProcessor "com.github.IVIanuu.Contributer:contributer-processor:$contributer"
+//    implementation "com.github.IVIanuu.Contributer:contributer-conductor:$contributer"
+//    implementation "com.github.IVIanuu.Contributer:contributer-annotations:$contributer"
+//    annotationProcessor "com.github.IVIanuu.Contributer:contributer-processor:$contributer"
 
     //Support Libs
     implementation "androidx.annotation:annotation:$androidxAnnotations"
