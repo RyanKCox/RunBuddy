@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.jakewharton.rxbinding2.view.clicks
+import com.revature.runbuddy.MainActivity
 import com.revature.runbuddy.R
 import com.revature.runbuddy.databinding.ControllerTitleScreenBinding
 import com.revature.runbuddy.presentation.core.conductor.MviBaseController
@@ -14,6 +16,8 @@ class TitleController : MviBaseController<TitleView, TitlePresenter>(),TitleView
     private lateinit var button:Button
 
     override fun onViewBound(view: View) {
+        (activity as MainActivity).getActivityComponent()
+            .inject(this)
         setup(view)
     }
 
@@ -24,13 +28,8 @@ class TitleController : MviBaseController<TitleView, TitlePresenter>(),TitleView
         button = binding.buttonTitle
     }
 
-    override fun initialIntent(): Observable<Unit> {
-        TODO("Not yet implemented")
-    }
 
-    override fun enterIntent(): Observable<Unit> {
-        TODO("Not yet implemented")
-    }
+    override fun enterIntent(): Observable<Unit> = button.clicks()
 
     override fun render(state: TitleViewState) {
         Log.d("TitleController","Render")

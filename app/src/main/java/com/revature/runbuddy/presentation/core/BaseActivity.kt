@@ -7,23 +7,31 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import com.revature.runbuddy.MainActivity
+import com.revature.runbuddy.presentation.RunBuddyApp
 import com.revature.runbuddy.presentation.core.di.components.DaggerAppComponent
+import com.revature.runbuddy.presentation.core.di.components.activity.ActivityComponent
 import com.revature.runbuddy.presentation.core.di.injectors.HasControllerInjector
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import io.reactivex.exceptions.Exceptions
 import javax.inject.Inject
 
-abstract class BaseActivity: AppCompatActivity(), HasControllerInjector {
+abstract class BaseActivity: AppCompatActivity()/*, HasControllerInjector*/ {
 
     protected  var router: Router? = null
-    @Inject
-    lateinit var controllerInjector: DispatchingAndroidInjector<Controller>
+//    @Inject
+//    lateinit var controllerInjector: DispatchingAndroidInjector<Controller>
 
-    override fun controllerInjector() = controllerInjector
+//    override fun controllerInjector() = controllerInjector
+
+    private lateinit var activityComponent:ActivityComponent
+
+    fun getActivityComponent()= activityComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+//        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         onCreating(savedInstanceState)
     }
@@ -37,6 +45,9 @@ abstract class BaseActivity: AppCompatActivity(), HasControllerInjector {
 //            .activity(this)
 //            .build()
 //        component.injectMembers(this)
+        activityComponent = (application as RunBuddyApp).getAppComponent()
+            .getActivityComponentFactory()
+            .create(this,this)
     }
 
     protected fun setupRouter(container:ViewGroup,savedInstanceState:Bundle?){

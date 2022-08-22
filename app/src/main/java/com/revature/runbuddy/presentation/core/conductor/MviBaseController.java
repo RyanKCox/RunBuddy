@@ -16,6 +16,7 @@ import com.hannesdorfmann.mosby3.MviConductorLifecycleListener;
 import com.hannesdorfmann.mosby3.MviController;
 import com.hannesdorfmann.mosby3.mvi.MviPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
+import com.revature.runbuddy.MainActivity;
 import com.revature.runbuddy.presentation.core.di.ConductorInjection;
 import com.revature.runbuddy.presentation.core.di.injectors.HasControllerInjector;
 
@@ -23,17 +24,16 @@ import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
 
-@SuppressWarnings("rawtypes")
 public abstract class MviBaseController<V extends MvpView,P extends MviPresenter<V,?>>
         extends
         MviController<V,P>
         implements
-        HasControllerInjector,
+//        HasControllerInjector,
         MvpView,
         MviConductorDelegateCallback<V,P> {
 
-    @Inject
-    DispatchingAndroidInjector<Controller> controllerInjector;
+//    @Inject
+//    DispatchingAndroidInjector<Controller> controllerInjector;
 
     private boolean shouldSetLifecycleListeners = true;
 
@@ -73,8 +73,8 @@ public abstract class MviBaseController<V extends MvpView,P extends MviPresenter
     @NonNull
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container, @Nullable Bundle savedViewState) {
-        if(controllerInjector == null)
-            injectDependencies();
+//        if(controllerInjector == null)
+//            injectDependencies();
         View view = inflater.inflate(getLayoutId(),container,false);
         onViewBound(view);
         return view;
@@ -84,13 +84,13 @@ public abstract class MviBaseController<V extends MvpView,P extends MviPresenter
     }
     @LayoutRes protected abstract int getLayoutId();
 
-    protected void onViewBound(View view){}
+    protected abstract void onViewBound(View view);
 
-    @NonNull
-    @Override
-    public DispatchingAndroidInjector<Controller> controllerInjector() {
-        return controllerInjector;
-    }
+//    @NonNull
+//    @Override
+//    public DispatchingAndroidInjector<Controller> controllerInjector() {
+//        return controllerInjector;
+//    }
 
     @NonNull
     @Override

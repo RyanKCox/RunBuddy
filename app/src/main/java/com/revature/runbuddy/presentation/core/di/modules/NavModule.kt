@@ -2,11 +2,13 @@ package com.revature.runbuddy.presentation.core.di.modules
 
 import com.revature.runbuddy.presentation.core.MainNavigator
 import com.revature.runbuddy.presentation.core.Navigator
+import com.revature.runbuddy.presentation.core.di.scope.PerActivity
 import dagger.Binds
 import dagger.Module
 
 @Module
-interface NavModule{
+abstract class NavModule {
+    @PerActivity
     @Binds
-    fun bindNav(nav:MainNavigator):Navigator
+    abstract fun bindNavigator(nav:MainNavigator):Navigator
 }

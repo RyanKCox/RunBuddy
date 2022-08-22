@@ -6,9 +6,10 @@ import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
-import com.hannesdorfmann.mosby3.MviController
 import com.revature.runbuddy.MainActivity
 import com.revature.runbuddy.presentation.core.conductor.routerTransaction
+import com.revature.runbuddy.presentation.core.di.scope.PerActivity
+import com.revature.runbuddy.presentation.mainmenu.MainMenuController
 import com.revature.runbuddy.presentation.title.TitleController
 import javax.inject.Inject
 
@@ -25,12 +26,15 @@ interface Navigator{
         options:String="")
     fun backFromChild()
 }
-
+@PerActivity
 class MainNavigator @Inject constructor(
-//    val activity:AppCompatActivity,
+    val activity:AppCompatActivity,
     val context: Context
 ) : Navigator {
-    private fun getRouter():Router? = (context as MainActivity).mainControllerChildRouter
+
+    //Casting of context not working
+
+    private fun getRouter():Router? = (activity as MainActivity).mainControllerChildRouter
 
     private fun push(
         newController: Controller,
@@ -64,7 +68,7 @@ class MainNavigator @Inject constructor(
         }
     }
     private fun title() = push(TitleController())
-    private fun mainMenu() { TODO()}//push(MainMenuController())
+    private fun mainMenu() = push(MainMenuController())
 
     override fun backFromChild() {
         TODO("Not yet implemented")

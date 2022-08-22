@@ -14,13 +14,16 @@ class MainActivity : BaseActivity() {
 
     val mainControllerChildRouter: Router?
         get() {
-            val mainController = router!!.getControllerWithTag(
-                TitleController::class.java.simpleName)
-            return if(mainController != null
-                && mainController.childRouters.size > 0
-                && mainController.childRouters[0]!= null){
-                mainController.childRouters[0]
-            } else null
+            return if(router != null)
+                router
+            else null
+//            val mainController = router!!.getControllerWithTag(
+//                TitleController::class.java.simpleName)
+//            return if(mainController != null
+//                && mainController.childRouters.size > 0
+//                && mainController.childRouters[0]!= null){
+//                mainController.childRouters[0]
+//            } else null
         }
 
     override fun onCreating(savedInstanceState: Bundle?) {
@@ -39,10 +42,10 @@ class MainActivity : BaseActivity() {
         Log.d("MainActivity","RootController Setup")
         setupRootController(TitleController())
     }
-/*
-    override fun prepareControllerComponent(subComponentBuilderHost: HasActivitySubcomponentBuilders): ActivityComponentBuilder<*, *> {
+    /*override fun prepareControllerComponent(subComponentBuilderHost: HasActivitySubcomponentBuilders): ActivityComponentBuilder<*, *> {
         return subComponentBuilderHost.getActivityComponentBuilder(
             MainActivityComponent.Builder::class.java
         )
     }*/
+
 }
